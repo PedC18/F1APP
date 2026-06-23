@@ -75,25 +75,6 @@ Este projeto está em evolução contínua e já possui melhorias planejadas:
 
 ---
 
-## 💡 Aprendizados
-
-Este projeto foi desenvolvido com foco em prática de:
-
-- Consumo de APIs reais
-- Estruturação de aplicações React modernas
-- Separação de responsabilidades (UI vs API layer)
-- TypeScript em aplicações front-end
-- Construção de interfaces orientadas a dados
-- Evolução incremental de UI (de simples → dashboard)
-
----
-
-## 📷 Interface
-
-> (Adicionar screenshots da aplicação aqui)
-
----
-
 ## 📌 Status
 
 🟢 Em desenvolvimento ativo — primeira versão funcional concluída
