@@ -1,11 +1,5 @@
 // components/DriverCard.tsx
-
-interface Driver {
-  full_name: string;
-  team_name: string;
-  driver_number: number;
-  headshot_url?: string;
-}
+import { Driver } from "../types/Driver";
 
 interface Props {
   driver: Driver;

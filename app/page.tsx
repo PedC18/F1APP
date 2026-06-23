@@ -2,14 +2,8 @@
 
 import { useEffect, useState } from "react";
 import DriverCard from "../components/DriverCard";
+import { Driver } from "../types/Driver";
 
-interface Driver {
-  full_name: string;
-  team_name: string;
-  driver_number: number;
-  country_code: string;
-  headshot_url?: string;
-}
 
 export default function Home() {
   const [drivers, setDrivers] = useState<Driver[]>([]);
@@ -32,13 +26,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main
-      style={{
-        maxWidth: "1200px",
-        margin: "0 auto",
-        padding: "2rem",
-      }}
-    >
+    <main className="max-w-7xl mx-auto p-8">
       <h1
         style={{
           fontSize: "2rem",
@@ -51,12 +39,18 @@ export default function Home() {
       {drivers.length === 0 ? (
         <p>Loading drivers...</p>
       ) : (
-        <>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "350px 1fr",
+            gap: "2rem",
+            alignItems: "start",
+          }}
+        >
+          {/* Left Column - Driver List */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns:
-                "repeat(auto-fill, minmax(220px, 1fr))",
               gap: "1rem",
             }}
           >
@@ -75,52 +69,58 @@ export default function Home() {
             ))}
           </div>
 
-          {selectedDriver && (
-            <div
-              style={{
-                marginTop: "2rem",
-                padding: "1.5rem",
-                border: "1px solid #ddd",
-                borderRadius: "12px",
-              }}
-            >
-              <h2
+          {/* Right Column - Driver Details */}
+          <div>
+            {selectedDriver && (
+              <div
                 style={{
-                  marginBottom: "1rem",
+                  padding: "2rem",
+                  border: "1px solid #ffffff",
+                  borderRadius: "12px",
                 }}
               >
-                {selectedDriver.full_name}
-              </h2>
-
-              {selectedDriver.headshot_url && (
-                <img
-                  src={selectedDriver.headshot_url}
-                  alt={selectedDriver.full_name}
-                  width={200}
+                <h2
                   style={{
-                    borderRadius: "12px",
+                    fontSize: "1.8rem",
                     marginBottom: "1rem",
                   }}
-                />
-              )}
+                >
+                  {selectedDriver.full_name}
+                </h2>
 
-              <p>
-                <strong>Team:</strong>{" "}
-                {selectedDriver.team_name}
-              </p>
+                {selectedDriver.headshot_url && (
+                  <img
+                    src={selectedDriver.headshot_url}
+                    alt={selectedDriver.full_name}
+                    width={300}
+                    style={{
+                      borderRadius: "12px",
+                      marginBottom: "1.5rem",
+                    }}
+                  />
+                )}
 
-              <p>
-                <strong>Number:</strong>{" "}
-                {selectedDriver.driver_number}
-              </p>
+                <div
+                  style={{
+                    display: "grid",
+                    gap: "0.75rem",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  <p>
+                    <strong>Team:</strong>{" "}
+                    {selectedDriver.team_name}
+                  </p>
 
-              <p>
-                <strong>Country:</strong>{" "}
-                {selectedDriver.country_code}
-              </p>
-            </div>
-          )}
-        </>
+                  <p>
+                    <strong>Number:</strong>{" "}
+                    {selectedDriver.driver_number}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       )}
     </main>
   );
