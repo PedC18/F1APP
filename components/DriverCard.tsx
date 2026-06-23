@@ -4,40 +4,51 @@ interface Driver {
   full_name: string;
   team_name: string;
   driver_number: number;
-  country_code: string;
   headshot_url?: string;
 }
 
-export default function DriverCard({ driver }: { driver: Driver }) {
+interface Props {
+  driver: Driver;
+  selected: boolean;
+  onClick: () => void;
+}
+
+export default function DriverCard({
+  driver,
+  selected,
+  onClick,
+}: Props) {
   return (
     <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "1rem",
-        borderRadius: "8px",
-        marginTop: "1rem",
-      }}
+      onClick={onClick}
+      className={`
+        cursor-pointer
+        rounded-lg
+        border
+        p-4
+        transition
+        hover:shadow-md
+        ${
+          selected
+            ? "border-red-500 bg-red-50"
+            : "border-gray-200"
+        }
+      `}
     >
       {driver.headshot_url && (
         <img
           src={driver.headshot_url}
           alt={driver.full_name}
-          width={200}
+          className="w-20 h-20 object-cover rounded-full mx-auto"
         />
       )}
 
-      <h2>{driver.full_name}</h2>
+      <h3 className="mt-2 text-center font-semibold">
+        {driver.full_name}
+      </h3>
 
-      <p>
-        <strong>Team:</strong> {driver.team_name}
-      </p>
-
-      <p>
-        <strong>Number:</strong> {driver.driver_number}
-      </p>
-
-      <p>
-        <strong>Country:</strong> {driver.country_code}
+      <p className="text-center text-sm text-gray-500">
+        {driver.team_name}
       </p>
     </div>
   );
